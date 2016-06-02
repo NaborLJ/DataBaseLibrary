@@ -88,5 +88,23 @@ public class Metodos {
             System.out.println(insertar.getMessage());
         }
     }
+      
+      /**
+       * Borra un registro de la tabla de la base de datos
+       * @param nomTabla marcamos el nombre de la tabla de la cual deseamos eliminar 
+       * @param primary_Key enviamos el nombre de la columna que sea la primary key
+       * @param id enviamos la primary key del registro que deseemos borrar
+       */
+      public void Delete(String nomTabla,String primary_Key,int id){
+      
+        try {
+            com.mysql.jdbc.PreparedStatement ps = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement("Delete from "+nomTabla+" where "+primary_Key+"='"+id+"'");
+            ps.executeUpdate();
+            showData(6);
+            System.out.println("Borrado exitoso");
+        } catch (SQLException delete) {
+            System.out.println(delete.getMessage());
+        }
+      }
 }
 
