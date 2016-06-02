@@ -106,5 +106,35 @@ public class Metodos {
             System.out.println(delete.getMessage());
         }
       }
+      
+      /**
+       * Actualiza los valores de un registro
+       * @param tabla pasamos el nombre de la tabla de la cual queremos hacer la modificacion
+       * @param parametrosActualizar seleccionamos la columna/as que deseemos modificar/actualizar
+       * @param datosNuevos enviamos los nuevos valores de dicha/as columnas
+       * @param primary_Key marcamos el nombre de la columna que contenga el primary key
+       * @param id enviamos la primary key del registro que querramos modificar
+       */
+      public void Actualize(String tabla,String parametrosActualizar,String datosNuevos,String primary_Key,int id){
+           try {
+            com.mysql.jdbc.PreparedStatement ps = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement("Update "+tabla+" set "+parametrosActualizar+" = '"+datosNuevos+"' where "+primary_Key+"='"+id+"'");
+            ps.executeUpdate();
+            showData(6);
+               System.out.println("Actualización exitosa");
+        } catch (SQLException actualize) {
+               System.out.println(actualize.getMessage());
+        }
+      }
+     /**
+      * Cierra la conexion con la base de datos
+      */
+      public void CloseConnection(){
+            try {
+            conn.close();
+        } catch (SQLException closeConnection) {
+            System.out.println(closeConnection.getMessage());
+        }
+      }
+      
 }
 
