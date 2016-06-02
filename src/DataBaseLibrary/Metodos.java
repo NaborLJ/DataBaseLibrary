@@ -70,6 +70,23 @@ public class Metodos {
             System.out.println(show.getMessage());
         }
 }
-   
+    /**
+     * Insiere el/los dato/datos que deseemos en la tabla.
+     * @param tabla marcamos cual es la tabla en la cual deseamos insertar los datos
+     * @param nomColumna pasamos las columnas que posee dicha tabla
+     * @param valores damos los valores a las columnas respetando el orden de como hayamos puesto las columnas anteriormente
+     */
+      public void Insertar(String tabla,String nomColumna,String valores){
+      
+    java.sql.PreparedStatement ps;
+        try {
+            ps = conn.prepareStatement("Insert into "+tabla+"("+nomColumna+") values ("+valores+")");
+            ps.execute();
+            System.out.println("Exito en la insercción.");
+            
+        } catch (Exception insertar) {
+            System.out.println(insertar.getMessage());
+        }
+    }
 }
 
