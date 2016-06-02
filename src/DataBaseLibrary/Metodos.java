@@ -48,6 +48,28 @@ public class Metodos {
             
         
     }
-    
+    /**
+     * Muestra la información guardada en la base de datos, solo debemos pasarle el numero de columnas/campos que posee la tabla de la base
+     * @param columna 
+     */
+    public void showData(int columna){
+        String[] data = new String[columna];
+        try {
+            Statement stm = (Statement) conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+             for(int x=0;x<+data.length;x++) {
+                 data[x]=rs.getString(x+1);
+                     System.out.println(data[x]);
+}
+            }
+            
+    }
+           
+         catch (SQLException show) {
+            System.out.println(show.getMessage());
+        }
+}
+   
 }
 
