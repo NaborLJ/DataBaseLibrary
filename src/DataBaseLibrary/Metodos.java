@@ -49,7 +49,7 @@ public class Metodos {
         
     }
     /**
-     * Muestra la información guardada en la base de datos, solo debemos pasarle el numero de columnas/campos que posee la tabla de la base
+     * Muestra la información buscada mediante el metodo Buscar(), solo debemos pasarle el numero de columnas/campos que posee la tabla de la base
      * @param columna 
      */
     public void showData(int columna){
