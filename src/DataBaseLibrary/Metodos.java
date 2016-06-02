@@ -34,5 +34,20 @@ public class Metodos {
         }
         return conn; 
     }
+    /**
+     * Permite buscar información en la base de datos mediante consultas con select, solo necesita saber el primary key
+     * @param parametro enviaremos aquí el parametro que deseemos seleccionar/buscar
+     * @param nomTabla nombre de la tabla en la cual deseamos buscar el parametro
+     * @param ID nombre de el campo que contenga la primary key
+     * @param primaryKey primary key que posea el campo que deseemos buscar
+     */
+    public void buscar(String parametro,String nomTabla,String ID,String primaryKey){
+        
+        
+            sql="Select "+parametro+" from "+nomTabla+" where "+ID+"='"+primaryKey+"'";
+            
+        
+    }
+    
 }
 
