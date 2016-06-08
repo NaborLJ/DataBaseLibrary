@@ -13,7 +13,7 @@ import java.sql.*;
  */
 
 public class Metodos {
-    String sql ="";
+   static String sql ="";
     String columna="";
    com.mysql.jdbc.Connection conn=null;
    
@@ -73,6 +73,7 @@ public class Metodos {
      */
     public void showData(int columna){
         String[] data = new String[columna];
+       
         try {
             Statement stm = (Statement) conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -81,6 +82,7 @@ public class Metodos {
                  data[x]=rs.getString(x+1);
                      System.out.println(data[x]);
 }
+            
             }
             
     }
