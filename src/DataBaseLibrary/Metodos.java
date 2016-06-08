@@ -29,6 +29,7 @@ public class Metodos {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             conn =(com.mysql.jdbc.Connection) DriverManager.getConnection(servidor+"/"+base+"?"+usuario+"&"+contraseña);
+            System.out.println("Conectado correctamente");
         }catch(Exception conectar){
             System.out.println(conectar.getMessage());
         }
@@ -41,11 +42,29 @@ public class Metodos {
      * @param ID nombre de el campo que contenga la primary key
      * @param primaryKey primary key que posea el campo que deseemos buscar
      */
-    public void buscar(String parametro,String nomTabla,String ID,String primaryKey){
+    public String buscar(String parametro,String nomTabla,String ID,String primaryKey){
         
         
-            sql="Select "+parametro+" from "+nomTabla+" where "+ID+"='"+primaryKey+"'";
-            
+       try {
+            Statement st= conn.createStatement();
+               ResultSet rs= st.executeQuery("Select "+parametro+" from "+nomTabla+" where "+ID+"='"+primaryKey+"'");
+                    String [] datos= new String[6];
+          while(rs.next()){
+          
+            for (int i = 0; i < datos.length; i++) {
+                datos[i]=rs.getString(i+1);
+                 sql= sql +" "+datos[i];
+                
+            }
+           
+          }
+                   
+        } catch (SQLException ex) {
+            System.out.println("Error en la visualizacion "+ex.getMessage());
+        }
+       
+        
+        return sql;
         
     }
     /**
@@ -115,7 +134,7 @@ public class Metodos {
        * @param primary_Key marcamos el nombre de la columna que contenga el primary key
        * @param id enviamos la primary key del registro que querramos modificar
        */
-      public void Actualize(String tabla,String parametrosActualizar,String datosNuevos,String primary_Key,int id){
+      public void Actualize(String tabla,String parametrosActualizar,String datosNuevos,String primary_Key,String id){
            try {
             com.mysql.jdbc.PreparedStatement ps = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement("Update "+tabla+" set "+parametrosActualizar+" = '"+datosNuevos+"' where "+primary_Key+"='"+id+"'");
             ps.executeUpdate();
@@ -135,6 +154,28 @@ public class Metodos {
             System.out.println(closeConnection.getMessage());
         }
       }
+      public String MultipleWhere(String parametro,String nomTabla,String ID,String valores,String ID2,String valores2) {
+       
+      
+       try {
+            Statement st= conn.createStatement();
+               ResultSet rs= st.executeQuery("Select "+parametro+" from "+nomTabla+" where "+ID+"='"+valores+"'"+"AND "+ID2+" = '"+valores2+"'");
+                    String [] datos= new String[6];
+          while(rs.next()){
+          
+            for (int i = 0; i < datos.length; i++) {
+                datos[i]=rs.getString(i+1);
+                 sql= sql +""+datos[i];
+                
+            }
+              
+              }
+                   
+        } catch (SQLException ex) {
+            System.out.println("Error en la visualizacion "+ex.getMessage());
+        }
+        return sql;
+ }
       
 }
 
